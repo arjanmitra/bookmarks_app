@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const morgan = require('morgan');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 
 const landingPage = require('./views/bookmarksLandingPage');
 const detailsPage = require('./views/bookmarksDetailsPage');
@@ -12,7 +12,7 @@ const port = process.env.port || 3000;
 
 app.use(require('method-override')('_method'));
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, '/public')));
 
@@ -32,7 +32,8 @@ app.get('/', async (req, res, next) => {
 app.get('/:name', async (req, res, next) => {
   try {
     const name = req.params.name;
-    const allBookmarksQuery = await db.models.Category.findAll({
+    console.log(name);
+    let allBookmarksQuery = await db.models.Category.findAll({
       include: [{ model: db.models.Bookmark }],
       where: {
         name: name,
@@ -70,16 +71,17 @@ app.post('/', async (req, res, next) => {
   }
 });
 
-app.post('/:name', async (req, res, next) => {
+app.delete('/:name/:id', async (req, res, next) => {
   try {
-    const reqbody = req.body;
-    console.log(req.headers);
-    // await db.models.Bookmark.destroy({
-    //   where: {
-    //     name: name,
-    //   },
-    // });
-    res.redirect('/');
+    const submitArray = req.body.submit.split(',');
+    const id = submitArray[0];
+    const title = submitArray[1];
+    await db.models.Bookmark.destroy({
+      where: {
+        id: id,
+      },
+    });
+    res.redirect(`/${title}`);
   } catch (err) {
     next(err);
   }

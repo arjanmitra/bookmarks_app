@@ -1,10 +1,9 @@
 const html = require('html-template-tag');
-function landingPage(categories = []) {
+function landingPage(categories = [], submitReturnValue = '') {
   return html`
     <html>
       <head>
         <title>Bookmarks</title>
-        <script src="/helperFunctions.js" defer></script>
         <link rel="stylesheet" href="/public/styles.css" />
       </head>
       <body>

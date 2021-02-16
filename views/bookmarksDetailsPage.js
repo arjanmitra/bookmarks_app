@@ -12,9 +12,16 @@ function detailsPage(title, bookmarks = []) {
         <div>
           ${bookmarks.map(
             (bookmark) =>
-              `<div><form method='POST' action='/${title}'>
-              <a name='${bookmark.name}' href='${bookmark.url}'>${bookmark.name}</a>
-              <button>x</button></form></div>`
+              `<div><form method='POST' action='/${title}/${
+                bookmark.id
+              }?_method=DELETE'>
+              <a name='${bookmark.id}' href='${bookmark.url}'>${
+                bookmark.name
+              }</a>
+              <button name='submit' value = '${[
+                bookmark.id,
+                title,
+              ]}'>x</button></form></div>`
           )}
           <br /><br /><br />
           <a href="/"><button>Back</button></a>
