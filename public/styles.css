@@ -1,0 +1,32 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+}
+
+form {
+  padding: 1rem;
+}
+
+#buttons {
+  display: flex;
+  flex-flow: row wrap;
+  flex-basis: 10%;
+  /* margin: 2rem; */
+}
+#buttons > div {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border-radius: 1rem;
+}
+
+#buttons button {
+  border-radius: 1rem;
+}
